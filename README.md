@@ -37,6 +37,7 @@ git clone https://github.com/Horki/CppND-Capstone-Snake-Game
 ```
 
 2. Make a build directory in the top level directory: `mkdir build && cd build`
-3. Build with conan. `conan install .. --build missing -s compiler.libcxx=libstdc++`
-4. Compile: `cmake .. && make`
-5. Run it: `./bin/SnakeGame`.
+3. Add Remote. `conan remote add bincrafters "https://api.bintray.com/conan/bincrafters/public-conan"`
+4. Build with conan. `conan install .. --build missing -s compiler.libcxx=libstdc++`
+5. Compile: `cmake .. && make`
+6. Run it: `./bin/SnakeGame`.
