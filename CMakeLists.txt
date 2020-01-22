@@ -11,7 +11,8 @@ set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-include_directories(${SDL2_INCLUDE_DIRS} src)
-
 add_executable(${PROJECT_NAME} src/main.cpp src/game.cpp src/controller.cpp src/renderer.cpp src/snake.cpp)
 target_link_libraries(${PROJECT_NAME} ${CONAN_LIBS})
+target_include_directories(${PROJECT_NAME}
+  PUBLIC
+  ${PROJECT_SOURCE_DIR}/include)
