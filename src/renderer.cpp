@@ -13,7 +13,7 @@ Renderer::Renderer(const std::size_t screen_width,
   // Initialize SDL
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     std::cerr << "SDL could not initialize.\n";
-    std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
+    std::cerr << "SDL_Error: " << SDL_GetError() << std::endl;
   }
 
   // Create Window
@@ -23,14 +23,14 @@ Renderer::Renderer(const std::size_t screen_width,
 
   if (nullptr == sdl_window) {
     std::cerr << "Window could not be created.\n";
-    std::cerr << " SDL_Error: " << SDL_GetError() << "\n";
+    std::cerr << " SDL_Error: " << SDL_GetError() << std::endl;
   }
 
   // Create renderer
   sdl_renderer = SDL_CreateRenderer(sdl_window, -1, SDL_RENDERER_ACCELERATED);
   if (nullptr == sdl_renderer) {
     std::cerr << "Renderer could not be created.\n";
-    std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
+    std::cerr << "SDL_Error: " << SDL_GetError() << std::endl;
   }
 }
 
@@ -63,9 +63,10 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
   }
 
   // Render snake's head
-  block.x = static_cast<int>(snake.head_x) * block.w;
-  block.y = static_cast<int>(snake.head_y) * block.h;
-  if (snake.alive) {
+  std::pair<int, int> head = snake.Head();
+  block.x = head.first * block.w;
+  block.y = head.second * block.h;
+  if (snake.IsAlive()) {
     SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x7A, 0xCC, 0xFF);
   } else {
     SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
